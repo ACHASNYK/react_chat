@@ -1,42 +1,62 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function InChatMessage() {
-  const InChatMessage = styled.div`
+const Container = styled.div`
 
     box-sizing: border-box;
-    border: 1px solid #484848;
-    border-radius: 5vh;
-    width: ;
+    
+    width: 100%;
+    max-width: fit-content;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
+    padding-top: 3vh;
+    padding-bottom: 1vh;
+       
     `;
   const UserAvatar = styled.div`
-  min-width: 4%;
-  min-height: 4%;
-  border-radius: 50%;
+    width: 7vh;
+    height: 7vh;
+    border-radius: 50%;
+    border: 1px solid gainsboro;
+    margin-left: 3vh;
   `;
   const UserPhoto = styled.img`
-  object-fit: contain;
+    object-fit: contain;
   `;
 
-  const InUserMessage = styled.div`
-  width: fit-content;
-  padding: 3%;
-  margin-left: 2%;
-  border: 1px solid grey;
-  border-radius: 10%;
-  height: 3%;
-  background-color: grey;
-  color: black;
-  `
+const InUserMessage = styled.div`
+  min-width: 15vh;
+  /* text-align: center; */
+  margin-left: 5vh;
+  border: 1px solid #383838;
+  border-radius: 5vh;
+  padding: 2vh;
+  background-color: #383838;
+  color: white;
+  font-size: 1.5em;
+  font-weight: 400;
+  `;
+const DateLabel = styled.div`
+  text-align: left;
+  padding-left: 15vh;
+  font-size: 1em;
+  font-weight: 200;
+  color: #383838;
+`
+
+export default function InChatMessage() {
+  
   return (
-      <InChatMessage>
+    <>
+      <Container>
       <UserAvatar>
         <UserPhoto alt='image' ></UserPhoto>  
       </UserAvatar>
-          <InUserMessage></InUserMessage>          
-    </InChatMessage>
+      <InUserMessage>skjnkjnjf f jlfknlkns dfs nklkn sdf </InUserMessage> 
+       </Container>
+      <DateLabel>08/20/2022 15:04</DateLabel>
+    </>  
   )
 }

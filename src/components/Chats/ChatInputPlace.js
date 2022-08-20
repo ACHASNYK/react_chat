@@ -2,16 +2,14 @@ import React, {Component } from 'react';
 import styled from 'styled-components';
 import {ReactComponent as Send } from '../../components/Icons/send.svg'
 
-export default function ChatInputPlace() {
-    
-    const ChatInputPlace = styled.div`
+const MainContainer = styled.div`
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         background-color: whitesmoke;
-        border: 1px solid black;
+        border-top: 1px solid gainsboro;
         height: 18vh;
     `;
     const InputContainer = styled.div`
@@ -32,27 +30,34 @@ export default function ChatInputPlace() {
     const InputForm = styled.input.attrs(props => ({
         type: 'text'
     }))`
-    width: 70%;
-    min-height: 1rem;
-    box-sizing: border-box;
-    border: 1px solid black;
-    color: black;
-    text-align: left;
+        border: none;
+        outline: none;
+        width: 70%;
+        min-height: 1rem;
+        box-sizing: border-box;
+        margin-left: 2vh;
+        color: #383838;
+        text-align: left;
+        font-size: 1em;
+    ::placeholder {
+            color: grey;
+        }
     
     `;
 
     const SendButton = styled.div`
     box-sizing: border-box;
-    border: 1px solid black;
-    `
     
+    `
+export default function ChatInputPlace() {
+            
     return (
               
-        <ChatInputPlace>
+        <MainContainer>
             <InputContainer>
-                <InputForm></InputForm>
+                <InputForm placeholder='Type your massage'></InputForm>
                 <SendButton><Send/></SendButton>
             </InputContainer>
-    </ChatInputPlace>
+        </MainContainer>
   )
 }

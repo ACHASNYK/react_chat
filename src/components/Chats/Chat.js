@@ -10,7 +10,7 @@ export default function Chat() {
     const Chat = styled.div`
     display: flex;
     flex-direction: column;
-    border: 1px solid gainsboro;
+    /* border: 1px solid gainsboro; */
     width: 65%;
     height: 100%;
     `

@@ -18,7 +18,8 @@ export default function ChatHeader() {
     `;
     const UserAvatar = styled.div`
     box-sizing: border-box;
-    border: 1px solid gainsboro;
+    border-top: 1px solid gainsboro;
+    border-bottom: 1px solid gainsboro;
     width: 7vh;
     height: 7vh;
     border-radius: 50%;
@@ -26,12 +27,14 @@ export default function ChatHeader() {
     `;
     const UserTitle = styled.div`
     width: fit-content;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid black;
-    height: 5vh;
+    text-align: center;
+    
+    padding-bottom: 1vh;
+    font-size: 2em;
+    font-weight: 400;
+    
     `;
-    const title = 'USER_NAME';
+    const title = 'Josefina';
   return (
       <ChatHeader>
           <UserAvatar></UserAvatar>

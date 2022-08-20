@@ -28,7 +28,8 @@ const UserPhoto = styled.img`
 const UserData = styled.div`
     display: flex;
     flex-direction: column;
-    max-width: 60%;
+    width: 60%;
+    
     height: 10vh;
 
 `;
@@ -45,8 +46,17 @@ const RecentMessage = styled.div`
     font-weight: 200;
     color: dimgrey;
     text-align: left;
-    text-align: ;
+    
+`;
 
+const Date = styled.div`
+    width: 20%;
+    font-size: 1.2em;
+    font-weight: 400;
+    color: #383838;
+    text-align: right;
+    padding-bottom: 1em;
+    
 `;
 
 export default function UserItem() {
@@ -59,6 +69,7 @@ export default function UserItem() {
               <UserTitle>Josefina</UserTitle>
               <RecentMessage>lets meet today</RecentMessage>
           </UserData>
+          <Date>Aug 20, 2022</Date>
     </Item>
   )
 }
