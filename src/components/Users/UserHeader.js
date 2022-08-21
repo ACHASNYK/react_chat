@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as SearchLogo } from '../Icons/search.svg';
+import { ReactComponent as Circle } from '../Icons/check_circle.svg'
 
 export default function UserHeader() {
 
@@ -19,6 +20,7 @@ export default function UserHeader() {
         margin-top: 3vh;
         margin-left: 3vh;
         margin-bottom: 4vh;
+        position: relative;
         
     `;
     const UserPhoto = styled.img`
@@ -52,11 +54,21 @@ export default function UserHeader() {
             color: grey;
         }
     `;
+    const Check = styled.div`
+        position: fixed;
+        margin-top: 0vh;
+        margin-left: 4vh;
 
+    `;
     
   return (
       <UserHeader>
-          <UserAvatar><UserPhoto alt="image" /></UserAvatar>
+          <UserAvatar>
+              <UserPhoto alt="image" />
+              <Check>
+                  <Circle/>
+              </Check>
+        </UserAvatar>
           <UserSearch>
               <SearchLogo></SearchLogo>
               <SearchField placeholder='Search or start new chat'></SearchField>

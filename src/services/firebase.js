@@ -1,6 +1,30 @@
 import { initializeApp } from "firebase/app";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp,
+    onSnapshot,
+    query,
+    orderBy,
+} from 'firebase/firestore';
 
+function getMessages(userID, callback) {
+    return onSnapshot(
+        query(
+            collection(db, 'chat-app', userID, 'messages'),
+            orderBy('timestamp', 'asc')
+        ),
+        (querySnapshot) => {
+            const messages = querySnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            callback(messages);
+        }
+    );
+}
 const firebaseConfig = {
   apiKey: "AIzaSyCXkfmnK4WuThdx-CQxOkwWOIaHVW6GgXQ",
   authDomain: "chat-app-achasnyk.firebaseapp.com",
@@ -11,6 +35,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 async function loginWithGoogle() {
     try {
@@ -18,8 +43,9 @@ async function loginWithGoogle() {
         const auth = getAuth();
 
         const { user } = await signInWithPopup(auth, provider);
-
-        return { uid: user.uid, displayName: user.displayName };
+        const full = await signInWithPopup(auth, provider);
+        console.log(full)
+        return { uid: user.uid, displayName: user.displayName, photo: user.photoURL };
     } catch (error) {
         if (error.code !== 'auth/cancelled-popup-request') {
             console.error(error);

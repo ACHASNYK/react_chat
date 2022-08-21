@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {ReactComponent as Circle } from '../Icons/check_circle.svg'
 
 const Item = styled.div`
     width: 100%;
@@ -20,16 +21,27 @@ const UserAvatar = styled.div`
     width: 8vh;
     border: 1px solid gainsboro;
     margin-left: 1em;
+    position: relative;
 `;
 const UserPhoto = styled.img`
     object-fit: contain;
+    position: relative;
+    /* margin-top: 0; */
+    border-radius: 50%;
+    /* margin-left: 0vh; */
+    /* padding-top: 1px; */
+    /* padding-right: 1px; */
+    height: 8vh;
+    width: 8vh;
+    
 `;
 
 const UserData = styled.div`
     display: flex;
     flex-direction: column;
     width: 60%;
-    
+    margin-top: 3vh;
+    margin-left: 2vh;
     height: 10vh;
 
 `;
@@ -58,12 +70,39 @@ const Date = styled.div`
     padding-bottom: 1em;
     
 `;
+const Check = styled.div`
+    position: fixed;
+    margin-top: -2.5vh;
+    margin-left: 6vh;
+
+`;
+const Alert = styled.div`
+    position: fixed;
+    border: 1px solid #383838;
+    background-color: #383838;
+    color: white;
+    height: 2.2vh;
+    width: 2.2vh;
+    border-radius: 50%;
+    margin-left: 6vh;
+    margin-top: -.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    z-index: 2;
+
+`
 
 export default function UserItem() {
   return (
       <Item>
           <UserAvatar>
-              <UserPhoto/>
+              <Alert>3</Alert>
+              <UserPhoto alt='image' src='https://i.pravatar.cc/100?img=52' />
+              <Check>
+                  <Circle/>
+              </Check>
           </UserAvatar>
           <UserData>
               <UserTitle>Josefina</UserTitle>
