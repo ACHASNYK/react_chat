@@ -25,6 +25,18 @@ function getMessages(userID, callback) {
         }
     );
 }
+
+async function postMessage(userID, text) {
+    try {
+        await addDoc(collection(db, 'chat-app', userID, 'messages'), {
+            timestamp: serverTimestamp(),
+            is_incoming: false,
+            value: text.trim(),
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
 const firebaseConfig = {
   apiKey: "AIzaSyCXkfmnK4WuThdx-CQxOkwWOIaHVW6GgXQ",
   authDomain: "chat-app-achasnyk.firebaseapp.com",
@@ -43,8 +55,7 @@ async function loginWithGoogle() {
         const auth = getAuth();
 
         const { user } = await signInWithPopup(auth, provider);
-        const full = await signInWithPopup(auth, provider);
-        console.log(full)
+       
         return { uid: user.uid, displayName: user.displayName, photo: user.photoURL };
     } catch (error) {
         if (error.code !== 'auth/cancelled-popup-request') {
@@ -55,4 +66,4 @@ async function loginWithGoogle() {
     }
 }
 
-export { loginWithGoogle };
+export { loginWithGoogle, postMessage, };

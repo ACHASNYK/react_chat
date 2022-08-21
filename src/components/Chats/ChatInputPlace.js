@@ -1,6 +1,8 @@
-import React, {Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import {ReactComponent as Send } from '../../components/Icons/send.svg'
+import { ReactComponent as Send } from '../../components/Icons/send.svg';
+import { postMessage } from '../../services/firebase';
+import { useState } from 'react';
 
 const MainContainer = styled.div`
         box-sizing: border-box;
@@ -45,18 +47,35 @@ const MainContainer = styled.div`
     
     `;
 
-    const SendButton = styled.div`
+    const SendButton = styled.button`
     box-sizing: border-box;
     
     `
 export default function ChatInputPlace() {
+    const user = 'Josefina';
+    const [value, setValue] = useState('');
+    const handleInput = (e) => {
+        setValue(e.target.value)
+    };
+    const handlePost = (e) => {
+        e.preventDefault();
+        postMessage(user, value);
+        setValue('');
+    }
             
     return (
               
         <MainContainer>
-            <InputContainer>
-                <InputForm placeholder='Type your massage'></InputForm>
-                <SendButton><Send/></SendButton>
+            <InputContainer onSubmit={handlePost} >
+                <InputForm placeholder='Type your message'
+                    value={value}
+                    onChange={handleInput}
+                    required
+                    minLength={1}
+                ></InputForm>
+                <SendButton type='submit'
+                    disabled={value < 1 }
+                ><Send /></SendButton>
             </InputContainer>
         </MainContainer>
   )

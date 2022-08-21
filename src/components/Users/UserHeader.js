@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as SearchLogo } from '../Icons/search.svg';
-import { ReactComponent as Circle } from '../Icons/check_circle.svg'
+import { ReactComponent as Circle } from '../Icons/check_circle.svg';
+import { useEffect, useState } from 'react';
 
 export default function UserHeader() {
+
+    
 
     const UserHeader = styled.div`
     box-sizing: border-box;
@@ -12,9 +15,16 @@ export default function UserHeader() {
     background-color: whitesmoke;
     border-bottom: 1px solid gainsboro;
     `;
+
+    const UserContainer = styled.div`
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+    `;
     const UserAvatar = styled.div`
-        height: 6vh;
-        width: 6vh;
+        height: 7vh;
+        width: 7vh;
         border: 1px solid gainsboro;
         border-radius: 50%;
         margin-top: 3vh;
@@ -25,6 +35,18 @@ export default function UserHeader() {
     `;
     const UserPhoto = styled.img`
         object-fit: contain;
+        border-radius: 50%;
+        height: 7vh;
+        width: 7vh;
+    `;
+
+    const UserTitle = styled.div`
+        font-size: 2em;
+        font-weight: 500;
+        color: #383838;
+        text-align: center;
+        margin-left: 3vh;
+        margin-bottom: 1vh;
     `;
     const UserSearch = styled.div`
         display: flex;
@@ -56,19 +78,27 @@ export default function UserHeader() {
     `;
     const Check = styled.div`
         position: fixed;
-        margin-top: 0vh;
-        margin-left: 4vh;
+        margin-top: -3vh;
+        margin-left: 5vh;
 
     `;
     
+        const { displayName, photo, } = JSON.parse(sessionStorage.getItem('login'));
+    console.log(photo)
+    
+    
   return (
       <UserHeader>
-          <UserAvatar>
-              <UserPhoto alt="image" />
+          
+          <UserContainer>
+              <UserAvatar>
+                  <UserPhoto alt='image' src={ photo } />
               <Check>
                   <Circle/>
               </Check>
-        </UserAvatar>
+            </UserAvatar>
+              <UserTitle>Welcome, { displayName }</UserTitle>
+          </UserContainer>    
           <UserSearch>
               <SearchLogo></SearchLogo>
               <SearchField placeholder='Search or start new chat'></SearchField>

@@ -7,9 +7,10 @@ import useAuth  from './services/useAuth';
 function App() {
 
   const { user } = useAuth();
+  const alt = JSON.parse(sessionStorage.getItem('login'))
   return (
     <div className="App">
-      {user ? <Main /> : <Login/>}
+      {user||alt? <Main /> : <Login/>}
     </div>
   );
 }

@@ -7,7 +7,7 @@ function useAuth() {
     if (!value) {
         throw new Error("AuthContext's value is undefined.");
     }
-    console.log(value);
+   
     return value;
 }
 
