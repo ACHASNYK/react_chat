@@ -66,4 +66,4 @@ async function loginWithGoogle() {
     }
 }
 
-export { loginWithGoogle, postMessage, };
+export { loginWithGoogle, postMessage, db };

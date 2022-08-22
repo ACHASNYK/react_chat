@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Timestamp } from 'firebase/firestore';
 
 const Container = styled.div`
 
@@ -24,8 +25,8 @@ const OutUserMessage = styled.div`
   
   background-color: gainsboro;
   color: #383838;
-  font-size: 1.5em;
-  font-weight: 400;
+  font-size: 1em;
+  font-weight: 500;
   `;
 const DateLabel = styled.div`
   text-align: right;
@@ -35,14 +36,17 @@ const DateLabel = styled.div`
   color: #383838;
 `
 
-export default function OutChatMessage() {
-    
+export default function OutChatMessage({value, timestamp}) {
+    const stamp = (date) => {
+      const newDate = new Date(date.seconds*1000)
+      return newDate.toLocaleString();
+    }
   return (
     <>
      <Container>
-      <OutUserMessage>Hello!</OutUserMessage>
+      <OutUserMessage>{value}</OutUserMessage>
       </Container>
-      <DateLabel>08/20/2022, 15:24</DateLabel>
+      <DateLabel>{stamp(timestamp)}</DateLabel>
     </>
   )
 }

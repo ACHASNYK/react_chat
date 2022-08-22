@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-
-export default function ChatHeader() {
-    const ChatHeader = styled.div`
+const Container = styled.div`
     width: 100%;
     height: 15vh;
     border: 1px solid gainsboro;
@@ -18,27 +16,39 @@ export default function ChatHeader() {
     `;
     const UserAvatar = styled.div`
     box-sizing: border-box;
-    border-top: 1px solid gainsboro;
-    border-bottom: 1px solid gainsboro;
-    width: 7vh;
-    height: 7vh;
+    border: 1px solid gainsboro;
+    
+    width: 9vh;
+    height: 9vh;
     border-radius: 50%;
     margin-left: 2vw;
     `;
+
+    const UserPhoto = styled.img`
+      object-fit: contain;
+      width: 9vh;
+      height: 9vh;
+      border-radius: 50%;
+    `
     const UserTitle = styled.div`
     width: fit-content;
     text-align: center;
     
     padding-bottom: 1vh;
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: 400;
     
     `;
-    const title = 'Josefina';
+
+export default function ChatHeader({id, photo}) {
+    
+    
   return (
-      <ChatHeader>
-          <UserAvatar></UserAvatar>
-          <UserTitle>{ title }</UserTitle>
-    </ChatHeader>
+      <Container>
+          <UserAvatar>
+            <UserPhoto alt='user photo' src={photo}/>
+          </UserAvatar>
+          <UserTitle>{ id }</UserTitle>
+    </Container>
   )
 }

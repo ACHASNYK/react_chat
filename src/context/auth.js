@@ -1,10 +1,11 @@
 import React from 'react';
 import { loginWithGoogle } from '../services/firebase';
+import { useState } from 'react';
 
 const AuthContext = React.createContext();
 
 const AuthProvider = (props) => {
-    const [user, setUser] = React.useState(null);
+    const [user, setUser] = useState(null);
 
     const login = async () => {
         const user = await loginWithGoogle();

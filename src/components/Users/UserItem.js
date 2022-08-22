@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux/es/exports';
+import { set_userId } from '../../services/userid';
 import {ReactComponent as Circle } from '../Icons/check_circle.svg'
 
 const Item = styled.div`
@@ -12,6 +14,7 @@ const Item = styled.div`
     align-items: center;
     justify-content: flex-start;
     gap: 1em;
+    cursor: pointer;
 `;
 
 const UserAvatar = styled.div`
@@ -71,13 +74,13 @@ const Date = styled.div`
     
 `;
 const Check = styled.div`
-    position: fixed;
+    position: absolute;
     margin-top: -2.5vh;
     margin-left: 6vh;
 
 `;
 const Alert = styled.div`
-    position: fixed;
+    position: absolute;
     border: 1px solid #383838;
     background-color: #383838;
     color: white;
@@ -94,18 +97,20 @@ const Alert = styled.div`
 
 `
 
-export default function UserItem() {
+export default function UserItem({data}) {
+    const {id, user_photo } = data;
+    const dispatch = useDispatch();
   return (
-      <Item>
+      <Item onClick={()=> dispatch(set_userId(data))} >
           <UserAvatar>
               <Alert>3</Alert>
-              <UserPhoto alt='image' src='https://i.pravatar.cc/100?img=52' />
+              <UserPhoto alt='image' src={user_photo}  />
               <Check>
                   <Circle/>
               </Check>
           </UserAvatar>
           <UserData>
-              <UserTitle>Josefina</UserTitle>
+              <UserTitle>{id}</UserTitle>
               <RecentMessage>lets meet today</RecentMessage>
           </UserData>
           <Date>Aug 20, 2022</Date>

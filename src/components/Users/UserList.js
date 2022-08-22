@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import UserItem from './UserItem';
 
 const List = styled.ul`
@@ -10,14 +11,17 @@ const List = styled.ul`
     width: 100%;
 `
 
-export default function UserList() {
+export default function UserList({data}) {
 
+  
 
   return (
     <List>
-      <UserItem />
-      <UserItem />
-      <UserItem/>
+      {data.map((e, i) => {console.log(e.id, e.user_photo)
+        return (<UserItem key={i} data={e}  />)
+      })}
+      
+      
     </List>
   )
 }

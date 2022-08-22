@@ -16,14 +16,17 @@ const Container = styled.div`
        
     `;
   const UserAvatar = styled.div`
-    width: 7vh;
-    height: 7vh;
+    width: 8vh;
+    height: 8vh;
     border-radius: 50%;
     border: 1px solid gainsboro;
     margin-left: 3vh;
   `;
   const UserPhoto = styled.img`
     object-fit: contain;
+    width: 8vh;
+    height: 8vh;
+    border-radius: 50%;
   `;
 
 const InUserMessage = styled.div`
@@ -35,8 +38,8 @@ const InUserMessage = styled.div`
   padding: 2vh;
   background-color: #383838;
   color: white;
-  font-size: 1.5em;
-  font-weight: 400;
+  font-size: 1em;
+  font-weight: 350;
   `;
 const DateLabel = styled.div`
   text-align: left;
@@ -46,17 +49,21 @@ const DateLabel = styled.div`
   color: #383838;
 `
 
-export default function InChatMessage() {
+export default function InChatMessage({value, photo, timestamp}) {
   
+  const stamp = (date) => {
+    const newDate = new Date(date.seconds*1000)
+    return newDate.toLocaleString();
+  }
   return (
     <>
       <Container>
       <UserAvatar>
-        <UserPhoto alt='image' ></UserPhoto>  
+        <UserPhoto alt='image' src={photo} ></UserPhoto>  
       </UserAvatar>
-      <InUserMessage>skjnkjnjf f jlfknlkns dfs nklkn sdf </InUserMessage> 
+      <InUserMessage>{value}</InUserMessage> 
        </Container>
-      <DateLabel>08/20/2022 15:04</DateLabel>
+      <DateLabel>{stamp(timestamp)}</DateLabel>
     </>  
   )
 }
