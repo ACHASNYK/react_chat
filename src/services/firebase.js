@@ -4,33 +4,73 @@ import {
     getFirestore,
     collection,
     addDoc,
+    
+    where,
     serverTimestamp,
     onSnapshot,
     query,
     orderBy,
 } from 'firebase/firestore';
 
+function getUpdate(source, callback) {
+    let alert = [];
+    return onSnapshot(
+        query(
+            collection(db, source ),
+            
+        ),
+        (querySnapshot) => {
+           querySnapshot.docChanges().forEach((change) => {
+                            if (change.type==='added'){
+                    alert.push(change.doc.data())
+                }
+            });
+            console.log(alert)
+            callback(alert);
+        }
+    );
+}
 function getMessages(userID, callback) {
     return onSnapshot(
         query(
-            collection(db, 'chat-app', userID, 'messages'),
-            orderBy('timestamp', 'asc')
+            collection(db, 'chat-app2'),
+            orderBy('timestamp', 'asc'),
+            
         ),
         (querySnapshot) => {
             const messages = querySnapshot.docs.map((doc) => ({
+                
                 id: doc.id,
                 ...doc.data(),
             }));
+            
             callback(messages);
         }
     );
 }
 
 async function postMessage(userID, text) {
+    const colRef = collection(db, 'chat-app2')
     try {
-        await addDoc(collection(db, 'chat-app', userID, 'messages'), {
+        await addDoc(colRef, {
+            user: userID,
             timestamp: serverTimestamp(),
             is_incoming: false,
+            value: text.trim(),
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function postAnswer(userID, text) {
+    const colRef = collection(db, 'chat-app2')
+    try {
+        await addDoc(colRef, {
+            user: userID,
+            timestamp: serverTimestamp(),
+            is_incoming: true,
+            is_delayed: true,
             value: text.trim(),
         });
     } catch (error) {
@@ -66,4 +106,4 @@ async function loginWithGoogle() {
     }
 }
 
-export { loginWithGoogle, postMessage, db };
+export { loginWithGoogle, postMessage, db, getMessages, getUpdate, postAnswer };

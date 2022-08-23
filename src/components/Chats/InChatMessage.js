@@ -32,6 +32,7 @@ const Container = styled.div`
 const InUserMessage = styled.div`
   min-width: 15vh;
   /* text-align: center; */
+  max-width: 60%;
   margin-left: 5vh;
   border: 1px solid #383838;
   border-radius: 5vh;
@@ -39,7 +40,7 @@ const InUserMessage = styled.div`
   background-color: #383838;
   color: white;
   font-size: 1em;
-  font-weight: 350;
+  font-weight: 400 ;
   `;
 const DateLabel = styled.div`
   text-align: left;
@@ -52,7 +53,7 @@ const DateLabel = styled.div`
 export default function InChatMessage({value, photo, timestamp}) {
   
   const stamp = (date) => {
-    const newDate = new Date(date.seconds*1000)
+    const newDate = new Date(date?.seconds*1000)
     return newDate.toLocaleString();
   }
   return (

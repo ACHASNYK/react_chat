@@ -22,7 +22,7 @@ const OutUserMessage = styled.div`
   margin-right: 5vh;
   border: 1px solid gainsboro;
   border-radius: 5vh;
-  
+  max-width: 60%;
   background-color: gainsboro;
   color: #383838;
   font-size: 1em;
@@ -38,7 +38,7 @@ const DateLabel = styled.div`
 
 export default function OutChatMessage({value, timestamp}) {
     const stamp = (date) => {
-      const newDate = new Date(date.seconds*1000)
+      const newDate = new Date(date?.seconds*1000)
       return newDate.toLocaleString();
     }
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import useAuth from '../services/useAuth';
+import useAuth from '../hooks/useAuth';
 import styled from 'styled-components';
 
 const Container = styled.div`

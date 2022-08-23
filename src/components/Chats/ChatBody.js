@@ -2,21 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 import InChatMessage from './InChatMessage';
 import OutChatMessage from './OutChatMessage';
+import { useEffect } from 'react';
 
 const Body = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 80%;
+    background-color: #f8f8f8;
+    overflow-y: scroll;
     
     `;
 const ChatList = styled.ul`
     list-style: none;
-    background-color: #f8f8f8;
+    
     display: flex;
     flex-direction: column;
-    height: 100%;
+    max-height: fit-content;
     width: 100%;
+    
     margin-block-start: 0em;
     margin-block-end: 0em;
     margin-inline-start: 0px;
@@ -25,14 +29,18 @@ const ChatList = styled.ul`
     `;
 
 export default function ChatBody({data, photo}) {
-  
-    
+  const lastMessage = React.useRef(null);
+  const scrollDown = () => {
+    lastMessage.current?.scrollIntoView({ behavior: "smooth" });
+  };
+  useEffect(scrollDown, [data]);
+ 
     return (
     
-      <Body>
+      <Body >
           <ChatList>
           {data.map((e, i) => {
-            console.log(e.value)
+            // console.log(e.value)
             return e.is_incoming?
             <InChatMessage
             key={i} 
@@ -46,7 +54,7 @@ export default function ChatBody({data, photo}) {
             />
           })}  
           </ChatList>              
-          
+          <div ref={lastMessage}></div>
     </Body> 
   )
 }

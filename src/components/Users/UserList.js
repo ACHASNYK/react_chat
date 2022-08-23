@@ -9,11 +9,14 @@ const List = styled.ul`
     margin-block-end: 0em;
     padding-inline-start: 0px;
     width: 100%;
+    height: 80%;
+    overflow-y: scroll;
+
 `
 
-export default function UserList({data}) {
+export default function UserList({data, users}) {
 
-  
+  users?console.log(users):console.log('empty')
 
   return (
     <List>

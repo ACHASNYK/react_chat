@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux/es/exports';
-import { set_userId } from '../../services/userid';
+import { set_userId } from '../../redux/userid';
 import {ReactComponent as Circle } from '../Icons/check_circle.svg'
 
 const Item = styled.div`
     width: 100%;
-    height: 14vh;
+    height: 16vh;
     border-bottom: 1px solid gainsboro;
     background-color: white;
     display: flex;
@@ -43,7 +43,7 @@ const UserData = styled.div`
     display: flex;
     flex-direction: column;
     width: 60%;
-    margin-top: 3vh;
+    /* margin-top: 1vh; */
     margin-left: 2vh;
     height: 10vh;
 
@@ -66,8 +66,8 @@ const RecentMessage = styled.div`
 
 const Date = styled.div`
     width: 20%;
-    font-size: 1.2em;
-    font-weight: 400;
+    font-size: 1em;
+    font-weight: 300;
     color: #383838;
     text-align: right;
     padding-bottom: 1em;

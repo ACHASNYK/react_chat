@@ -4,6 +4,7 @@ import { ReactComponent as Send } from '../../components/Icons/send.svg';
 import { postMessage } from '../../services/firebase';
 import { useState } from 'react';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { getAnswer } from '../../services/getAnswer'
 
 const MainContainer = styled.div`
         box-sizing: border-box;
@@ -53,7 +54,7 @@ const MainContainer = styled.div`
     
     `
 export default function ChatInputPlace() {
-    const {id} = useSelector((state) => state.userId.value);
+    const {id} = useSelector((state) => state.userId.value)||JSON.parse(sessionStorage.getItem('current_user'));
     const [value, setValue] = useState('');
     
     const handleInput = (e) => {
@@ -64,12 +65,11 @@ export default function ChatInputPlace() {
         // e.preventDefault();
         postMessage(id, value);
         console.log(id, value);
+        getAnswer(id)
         setValue('');
     }
 
-    const norrisRequest = async e => {
-        fetch('https://api.chucknorris.io/jokes/random')
-    }
+    
             
     return (
               
@@ -81,7 +81,7 @@ export default function ChatInputPlace() {
                     required
                     minLength={1}
                 ></InputForm>
-                <SendButton type='submit' onClick={handlePost}
+                <SendButton type='submit' onClick={()=> handlePost()}
                     disabled={value < 1 }
                 ><Send /></SendButton>
             </InputContainer>

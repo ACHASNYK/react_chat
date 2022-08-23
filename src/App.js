@@ -2,9 +2,9 @@ import React from 'react';
 import './App.css';
 import Main from './components/Main';
 import Login from './components/Login';
-import useAuth  from './services/useAuth';
+import useAuth  from './hooks/useAuth';
 import { Provider } from 'react-redux';
-import store from './services/store';
+import store from './redux/store';
 
 function App() {
 
