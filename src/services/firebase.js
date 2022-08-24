@@ -4,7 +4,7 @@ import {
     getFirestore,
     collection,
     addDoc,
-    
+    getDocs,
     where,
     serverTimestamp,
     onSnapshot,
@@ -12,20 +12,38 @@ import {
     orderBy,
 } from 'firebase/firestore';
 
-function getUpdate(source, callback) {
+async function getUsers(){
+    const dbref = collection(db, 'chat-app');
+    let results = [];   
+        getDocs(dbref).then((snapshot) =>{
+                    
+                        snapshot.docs.forEach(doc => {
+                            
+                            results.push({...doc.data(), id: doc.id, counter: 0})
+                            console.log(results)
+                        })
+
+                       sessionStorage.setItem('current_users', JSON.stringify(results)) 
+                       
+                    })
+                                 
+    return results;            
+}
+
+async function getUpdate(source, callback) {
     let alert = [];
     return onSnapshot(
         query(
-            collection(db, source ),
-            
+            collection(db, source)
+
         ),
         (querySnapshot) => {
-           querySnapshot.docChanges().forEach((change) => {
-                            if (change.type==='added'){
-                    alert.push(change.doc.data())
+            querySnapshot.docChanges().forEach((change) => {
+                if (change.type === 'added') {
+                    alert.push(change.doc.data());
                 }
             });
-            console.log(alert)
+            console.log(alert);
             callback(alert);
         }
     );
@@ -106,4 +124,4 @@ async function loginWithGoogle() {
     }
 }
 
-export { loginWithGoogle, postMessage, db, getMessages, getUpdate, postAnswer };
+export { loginWithGoogle, postMessage, db, getMessages, getUpdate, postAnswer, getUsers };

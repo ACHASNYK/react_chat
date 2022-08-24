@@ -20,7 +20,7 @@ export default function UserList({data, users}) {
 
   return (
     <List>
-      {data.map((e, i) => {console.log(e.id, e.user_photo)
+      {data.map((e, i) => {
         return (<UserItem key={i} data={e}  />)
       })}
       

@@ -2,21 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as SearchLogo } from '../Icons/search.svg';
 import { ReactComponent as Circle } from '../Icons/check_circle.svg';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
-export default function UserHeader() {
-
-    
-
-    const UserHeader = styled.div`
+const Header = styled.div`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     background-color: whitesmoke;
     border-bottom: 1px solid gainsboro;
     `;
-
-    const UserContainer = styled.div`
+const UserContainer = styled.div`
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -84,11 +79,24 @@ export default function UserHeader() {
     `;
     
         const { displayName, photo, } = JSON.parse(sessionStorage.getItem('login'));
-    console.log(photo)
+    console.log(photo);
+
+export default function UserHeader({handleChange, value}) {
+
+    // const [list, setList] = useState();
+    
+    // const handleChange = (e) => {
+    //     setList(e.target.value)
+    //     console.log(e.target.value)
+    // }
+
+    
+
+    
     
     
   return (
-      <UserHeader>
+      <Header>
           
           <UserContainer>
               <UserAvatar>
@@ -101,9 +109,15 @@ export default function UserHeader() {
           </UserContainer>    
           <UserSearch>
               <SearchLogo></SearchLogo>
-              <SearchField placeholder='Search or start new chat'></SearchField>
+              <SearchField 
+              onChange={handleChange}
+              value={value}
+              placeholder='Search or start new chat'
+              required
+              >
+              </SearchField>
           </UserSearch>
-      </UserHeader>
+      </Header>
       
   )
 }

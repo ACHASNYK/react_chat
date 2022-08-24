@@ -100,8 +100,9 @@ const Alert = styled.div`
 export default function UserItem({data}) {
     const {id, user_photo } = data;
     const dispatch = useDispatch();
+    const setsessionId = (user) => {sessionStorage.setItem('current_user', JSON.stringify(user))}
   return (
-      <Item onClick={()=> dispatch(set_userId(data))} >
+      <Item onClick={()=> {dispatch(set_userId(data));setsessionId(data)}} >
           <UserAvatar>
               <Alert>3</Alert>
               <UserPhoto alt='image' src={user_photo}  />

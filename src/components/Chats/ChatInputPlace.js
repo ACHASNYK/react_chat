@@ -54,8 +54,13 @@ const MainContainer = styled.div`
     
     `
 export default function ChatInputPlace() {
-    const {id} = useSelector((state) => state.userId.value)||JSON.parse(sessionStorage.getItem('current_user'));
+
     const [value, setValue] = useState('');
+    const init = JSON.parse(sessionStorage.getItem('current_users'));
+    const data = useSelector((state) => state.userId.value)|| init[0];
+    const id = data?.id;
+    
+    
     
     const handleInput = (e) => {
         setValue(e.target.value)

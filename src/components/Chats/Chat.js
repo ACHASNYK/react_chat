@@ -35,45 +35,22 @@ const Container = styled.div`
 // font-weight: 400;
 // `;
 
-export default function Chat() {
+export default function Chat({init}) {
     
     
 
     // const [data, setData] = useState();
     // const [pending, setPending] = useState(false);
     // const [error, setError] = useState()
-    const init = {id: 'Alice Freemen', user_photo:'https://i.pravatar.cc/100?img=69'}
-    const user_id = useSelector((state)=> state.userId.value) || JSON.parse(sessionStorage.getItem('current_user'))||init;
-
+    const initial = JSON.parse(sessionStorage.getItem('current_user'))
+    const alt = init?.[0];
+    const user_id = useSelector((state)=> state.userId.value) || initial||alt;
+    
+    
     const data = useMessages(user_id.id);
     
     
-    // useEffect(() => {
-        
-    //     const dbref = collection(db,'chat-app',user_id.id, 'messages');
-    //     getDocs(dbref).then((snapshot) =>{
-    //         // if(snapshot.empty) {
-    //         //     setError('Sorry no users found please login to chat')
-    //         //     setPending(false)
-    //         // }else{
-    //             let results = [];
-    //             snapshot.docs.forEach(doc => {
-    //                 console.log(doc)
-    //                 results.push({...doc.data(), id: doc.id})
-    //                 console.log(results)
-    //             })
-    //             setData(results)
-    //             setPending(false)
-               
-    //         })
-    //     // }, err => {
-    //     //     setError(err.message)
-    //     //     setPending(false)
-            
-        
-
-        
-    // },[user_id.id])
+    
 
     const filter = data.filter(obj =>{
         return obj.user===user_id.id;
