@@ -18,7 +18,7 @@ const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
     <Provider store={store}>
       <div className="App">
         {isBigScreen && (user || alt) ? <Main /> : <Login />}
-        {isTabletOrMobile&&!user&&!alt? <MLogin/>: <Main/>}
+        {isTabletOrMobile&& <MLogin/>}
       </div>
     </Provider>
   );
