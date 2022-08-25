@@ -40,15 +40,15 @@ const Container = styled.div`
     
     `;
 
-export default function LChatHeader({id, photo}) {
+export default function LChatHeader() {
     
     
   return (
       <Container>
           <UserAvatar>
-            <UserPhoto alt='user photo' src={photo}/>
+            <UserPhoto src='https://www.pngitem.com/pimgs/m/105-1050694_user-placeholder-image-png-transparent-png.png'/>
           </UserAvatar>
-          <UserTitle>{ id }</UserTitle>
+          <UserTitle>unknown and unauthorized user</UserTitle>
     </Container>
   )
 }

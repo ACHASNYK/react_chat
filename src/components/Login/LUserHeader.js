@@ -93,7 +93,7 @@ export default function LUserHeader() {
           
           <UserContainer>
               <UserAvatar>
-                  <UserPhoto alt='image' src={'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-grey-photo-placeholder-male-default-profile-gray-person-picture-isolated-white-background-good-man-102846161.jpg'} />
+                  <UserPhoto alt='image' src={'https://www.pngitem.com/pimgs/m/105-1050694_user-placeholder-image-png-transparent-png.png'} />
               <Check>
                   <Circle/>
               </Check>

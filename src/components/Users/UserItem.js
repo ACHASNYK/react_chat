@@ -108,7 +108,7 @@ const Alert = styled.div`
 
 export default function UserItem({ data, messages }) {
     const [marked, setMarked] = useState(null)
-    const [boolean, setBoolean] = useState(true)
+    const [boolean, setBoolean] = useState(false)
     const [inc, setInc] = useState(null)
     const { id, user_photo } = data;
     const dispatch = useDispatch();
@@ -133,6 +133,7 @@ export default function UserItem({ data, messages }) {
     const handleBoolean = () => {
         setBoolean(false)
     }
+    
     const stamp = (data) => {
         const calc = new window.Date(data?.seconds * 1000)
         return calc.toLocaleString();
