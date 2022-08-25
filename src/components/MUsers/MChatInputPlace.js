@@ -19,7 +19,7 @@ const MainContainer = styled.div`
     const InputContainer = styled.div`
     box-sizing: border-box;
     height: 7vh;
-    width: 60%;
+    width: 80%;
     background-color: white;
     border-radius: 5vh;
     border: 1px solid gainsboro;
@@ -69,7 +69,7 @@ const MainContainer = styled.div`
 `
     
     
-export default function ChatInputPlace() {
+export default function MChatInputPlace() {
 
     const [value, setValue] = useState('');
     const init = JSON.parse(sessionStorage.getItem('current_users'));

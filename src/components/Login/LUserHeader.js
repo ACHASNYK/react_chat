@@ -64,32 +64,24 @@ const UserContainer = styled.div`
         type: 'text',
         
     }))`        
-        width: 30vh;
-        color: #383838;
-        font-size: 1.2em;
-        font-weight: 300;
+        width: 20vh;
+        color: dimgray;
         border: none;
         outline: none;
         ::placeholder {
             color: grey;
-            font-size: 0.9em;
         }
     `;
     const Check = styled.div`
-        position: absolute;
-        margin-top: -2vh;
+        position: absolut;
+        margin-top: -3vh;
         margin-left: 5vh;
 
     `;
     
         
-   
-
-export default function UserHeader({handleChange, value}) {
-
-    const { displayName, photo, } = JSON.parse(sessionStorage.getItem('login'));
     
-    
+export default function LUserHeader() {
 
     
 
@@ -101,18 +93,17 @@ export default function UserHeader({handleChange, value}) {
           
           <UserContainer>
               <UserAvatar>
-                  <UserPhoto alt='image' src={photo} />
+                  <UserPhoto alt='image' src={'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-grey-photo-placeholder-male-default-profile-gray-person-picture-isolated-white-background-good-man-102846161.jpg'} />
               <Check>
                   <Circle/>
               </Check>
             </UserAvatar>
-              <UserTitle>Welcome, {displayName}</UserTitle>
+              <UserTitle>Welcome, unauthorized user</UserTitle>
           </UserContainer>    
           <UserSearch>
               <SearchLogo></SearchLogo>
               <SearchField 
-              onChange={handleChange}
-              value={value}
+              
               placeholder='Search or start new chat'
               required
               >

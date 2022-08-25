@@ -5,6 +5,10 @@ import styled from 'styled-components';
 import {useEffect, useState} from 'react'
 import { db } from '../services/firebase';
 import { collection, getDocs } from 'firebase/firestore';
+import { useMediaQuery } from 'react-responsive'
+import MUsers from './MUsers/MUsers';
+import MChat from './MUsers/MChat';
+import { Route, Routes, BrowserRouter, } from "react-router-dom";
 
 const Container = styled.div`
     display: flex;
@@ -31,12 +35,34 @@ font-size: 2em;
 font-weight: 400;
 `;
 
+const Desktop = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+    
+    `;
+const Mobile = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    
+    `;
+
+
 export default function Main() {
     const [users, setUsers] = useState();
     const [pending, setPending] = useState(false);
     const [error, setError] = useState();
+    const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1224px)'
+    })
+    const isBigScreen = useMediaQuery({ query: '(min-width: 1824px)' })
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+    const isPortrait = useMediaQuery({ query: '(orientation: portrait)' })
+    const isRetina = useMediaQuery({ query: '(min-resolution: 2dppx)' })
     
-    const init1 = {id:'Josefina', user_photo: 'https://i.pravatar.cc/100?img=26'}
     
     useEffect(()=> {
 
@@ -49,8 +75,8 @@ export default function Main() {
                     }else{
                         let results = [];
                         snapshot.docs.forEach(doc => {
-                            console.log(doc)
-                            results.push({...doc.data(), id: doc.id})
+                            // console.log(doc)
+                            results.push({...doc.data(), id: doc.id, counter: null})
                             console.log(results)
                         })
                    
@@ -70,9 +96,20 @@ export default function Main() {
         
             <Container>
                 {error&&<ErrorLoading>{error}</ErrorLoading>}
-                {pending&&<Loading>Loading...</Loading>}
-                {users&&<Users init={users}></Users>}
-                {users&&<Chat init={users}></Chat>}
+                {pending && <Loading>Loading...</Loading>}
+            {isBigScreen && <Desktop>
+                {users && <Users init={users}></Users>}
+                {users && <Chat init={users}></Chat>}
+            </Desktop>}
+            {isTabletOrMobile && 
+                <Mobile init={users}>
+                    <BrowserRouter>
+                            <Routes>
+                                    <Route exact path="/" element={<MUsers init={users} />} />
+                                    <Route exact path="/chat" element={<MChat init={users} />} />
+                            </Routes>
+                    </BrowserRouter>
+                        </Mobile>}
             </Container>
         
     )

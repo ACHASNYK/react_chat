@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as SearchLogo } from '../Icons/search.svg';
 import { ReactComponent as Circle } from '../Icons/check_circle.svg';
-
+// import { useEffect, useState } from 'react';
 
 const Header = styled.div`
     box-sizing: border-box;
@@ -83,13 +83,18 @@ const UserContainer = styled.div`
     `;
     
         
-   
+    // console.log(photo);
 
-export default function UserHeader({handleChange, value}) {
+export default function MUserHeader({handleChange, value}) {
 
     const { displayName, photo, } = JSON.parse(sessionStorage.getItem('login'));
     
+    // const [list, setList] = useState();
     
+    // const handleChange = (e) => {
+    //     setList(e.target.value)
+    //     console.log(e.target.value)
+    // }
 
     
 

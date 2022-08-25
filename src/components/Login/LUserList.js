@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
-import UserItem from './UserItem';
+
 
 const List = styled.ul`
     list-style: none;
@@ -34,24 +33,10 @@ const List = styled.ul`
 
 
 
-export default function UserList({data, messages, all}) {
+export default function LUserList() {
   
-  const lastMessage = React.useRef(null);
-  const scrollUp = () => {
-    lastMessage.current?.scrollIntoView({ behavior: "smooth" });
-  };
-  useEffect(scrollUp, [data]);
- 
   return (
     <List>
-      <div ref={lastMessage}></div>
-      {data&&data.map((e, i) => {
-        return (<UserItem key={i}
-          data={e}
-          messages={all }
-           />)
-      })}
-      
       
     </List>
   )

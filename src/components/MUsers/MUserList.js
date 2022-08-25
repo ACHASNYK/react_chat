@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import UserItem from './UserItem';
+import MUserItem from './MUserItem';
 
 const List = styled.ul`
     list-style: none;
@@ -34,7 +34,7 @@ const List = styled.ul`
 
 
 
-export default function UserList({data, messages, all}) {
+export default function MUserList({data, messages, all}) {
   
   const lastMessage = React.useRef(null);
   const scrollUp = () => {
@@ -46,7 +46,7 @@ export default function UserList({data, messages, all}) {
     <List>
       <div ref={lastMessage}></div>
       {data&&data.map((e, i) => {
-        return (<UserItem key={i}
+        return (<MUserItem key={i}
           data={e}
           messages={all }
            />)

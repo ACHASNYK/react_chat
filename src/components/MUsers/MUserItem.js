@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux/es/exports';
 import { set_userId } from '../../redux/userid';
 import { ReactComponent as Circle } from '../Icons/check_circle.svg';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 
 const Item = styled.div`
     width: 100%;
@@ -106,7 +107,7 @@ const Alert = styled.div`
 
 `
 
-export default function UserItem({ data, messages }) {
+export default function MUserItem({ data, messages }) {
     const [marked, setMarked] = useState(null)
     const [boolean, setBoolean] = useState(true)
     const [inc, setInc] = useState(null)
@@ -115,7 +116,7 @@ export default function UserItem({ data, messages }) {
     const setsessionId = (user) => { sessionStorage.setItem('current_user', JSON.stringify(user)) }
     const myMessages = messages?.filter(obj => { return obj.user === id });
     const lastMessage = myMessages?.at(-1);
-    const value = lastMessage?.value.slice(0, 45);
+    const value = lastMessage?.value.slice(0, 20);
    ;
     const delayed = myMessages?.filter(obj => { return obj.is_delayed === true })
     
@@ -150,7 +151,8 @@ export default function UserItem({ data, messages }) {
         handleRendering()
     }, [handleMarked, handleBoolean, handleRendering])
   return (
-      <Item onClick={() => { dispatch(set_userId(data)); setsessionId(data); handleBoolean() }} >
+      <Link to="/chat" className='links'>
+        <Item onClick={() => { dispatch(set_userId(data)); setsessionId(data); handleBoolean() }} >
           <UserAvatar>
               <Alert boolean={ boolean}>NEW</Alert>
               <UserPhoto alt='image' src={user_photo}  />
@@ -163,6 +165,7 @@ export default function UserItem({ data, messages }) {
               <RecentMessage>{value}...</RecentMessage>
           </UserData>
           <Date>{ timestamp}</Date>
-    </Item>
+          </Item>
+      </Link>
   )
 }

@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import UserHeader from './UserHeader';
-import UserList from './UserList';
-import ChatsTitle from './ChatsTitle';
+import MUserHeader from './MUserHeader';
+import MUserList from './MUserList';
+import ChatsTitle from '../Users/ChatsTitle';
 import { db } from '../../services/firebase';
 import { useState, useEffect } from 'react';
-
+import { collection, connectFirestoreEmulator, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore';
+// import { useUpdate } from '../../hooks/useUpdate';
 import { useMessages } from '../../hooks/useMessages';
 import { set_marked } from '../../redux/marked';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 const Container = styled.div`
-    width: 35%;
+    width: 100%;
     height: 100%;
     border: 1px solid gainsboro;
     display: flex;
@@ -38,12 +39,16 @@ const Loading = styled.div`
 `;
 
 
-export default function Users({init}) {
-        
+export default function MUsers({init}) {
+
+    
+    // const [users, setUsers] = useState(init);
+    // const [pending, setPending] = useState(false);
+    // const [error, setError] = useState();
     const [list, setList] = useState();
     const source = 'chat-app2';
     const alert = useMessages(source);
-   
+    // const userlist = useSelector((state) => state.marked.value) || init;
     
       
     
@@ -57,9 +62,9 @@ export default function Users({init}) {
         console.log('lastId', lastId);
                
         
-        const idx = arr.findIndex(obj => { return obj.id === lastId });
+        const idx = arr?.findIndex(obj => { return obj.id === lastId });
         console.log('idx', idx)
-        return arr.splice(0, 0, ...arr.splice(idx, on)), arr;
+        return arr?.splice(0, 0, ...arr.splice(idx, on)), arr;
           
     }
     const finalList = move(init, incoming)
@@ -71,10 +76,10 @@ export default function Users({init}) {
     
     const handleChange = (e) =>{
             setList(e.target.value)
-        
+        // sessionStorage.setItem('list', JSON.stringify(list))
     }
 
-    const filtredList = finalList.filter(obj => {
+    const filtredList = finalList?.filter(obj => {
         if (list === undefined) {
             return obj
         } else {
@@ -86,10 +91,11 @@ export default function Users({init}) {
     
     return (
         <Container>
-            <UserHeader handleChange={handleChange} value={list }></UserHeader>
+            <MUserHeader handleChange={handleChange} value={list }></MUserHeader>
             <ChatsTitle></ChatsTitle>
-            
-            {init && <UserList data={filtredList} messages={incoming} all={ alert} />}
+            {/* {error&&<ErrorLoading>{error}</ErrorLoading>} */}
+            {/* {pending&&<Loading>Loading...</Loading>} */}
+            {init && <MUserList data={filtredList} messages={incoming} all={ alert} />}
             
             
         </Container>

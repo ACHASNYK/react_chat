@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import InChatMessage from './InChatMessage';
-import OutChatMessage from './OutChatMessage';
+import MInChatMessage from './MInChatMessage';
+import MOutChatMessage from './MOutChatMessage';
 import { useEffect, useState } from 'react';
 import { ReactComponent as Cancel} from '../Icons/close.svg'
 
@@ -101,7 +101,7 @@ const Button = styled.div`
 };
   `
 
-export default function ChatBody({data, photo, messages}) {
+export default function MChatBody({data, photo, messages}) {
     const [alarm, setAlarm] = useState(false);
     const [number, setNumber] = useState(null);
   const incoming = messages.filter(obj => {return obj.is_delayed===true })
@@ -129,12 +129,12 @@ export default function ChatBody({data, photo, messages}) {
           {data.map((e, i) => {
             
             return e.is_incoming?
-            <InChatMessage
+            <MInChatMessage
             key={i} 
             value={e.value} 
             photo={photo} 
             timestamp={e.timestamp}/> : 
-            <OutChatMessage
+            <MOutChatMessage
             key={i} 
             value={e.value}
             timestamp={e.timestamp}

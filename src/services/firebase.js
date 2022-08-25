@@ -30,11 +30,12 @@ async function getUsers(){
     return results;            
 }
 
-async function getUpdate(source, callback) {
+function getUpdate(source, callback) {
     let alert = [];
     return onSnapshot(
         query(
-            collection(db, source)
+            collection(db, source),
+            orderBy('timestamp', 'asc'),
 
         ),
         (querySnapshot) => {
@@ -48,7 +49,7 @@ async function getUpdate(source, callback) {
         }
     );
 }
-function getMessages(userID, callback) {
+function getMessages(userID,callback) {
     return onSnapshot(
         query(
             collection(db, 'chat-app2'),
