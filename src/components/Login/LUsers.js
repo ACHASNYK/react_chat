@@ -6,6 +6,7 @@ import ChatsTitle from '../../components/Users/ChatsTitle';
 
 
 const Container = styled.div`
+    position: relative;
     width: 35%;
     height: 100%;
     border: 1px solid gainsboro;

@@ -19,23 +19,6 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     `;
-const ErrorLoading = styled.div`
-    margin-top: 50%;
-    margin-right: 50%;
-    width: fit-content;
-    color: #383838;
-    font-size: 2em;
-    font-weight: 400;
-`;
-
-const Loading = styled.div`
-    margin-top: 50%;
-    margin-right: 50%;
-    width: fit-content;
-    color: #383838;
-    font-size: 2em;
-    font-weight: 400;
-`;
 
 
 export default function Users({init}) {
@@ -48,8 +31,7 @@ export default function Users({init}) {
       
     
     const incoming = alert.filter((obj)=>{return obj.is_delayed});
-    console.log('incoming', incoming)
-
+    
     
     
     const move = (arr, mess, on = 1) => {
@@ -63,7 +45,7 @@ export default function Users({init}) {
           
     }
     const finalList = move(init, incoming)
-    console.log(finalList)
+    
 
      
     

@@ -38,15 +38,15 @@ font-weight: 400;
 const Desktop = styled.div`
     display: flex;
     flex-direction: row;
-    width: 100%;
-    height: 100vh;
+    width: 99.9%;
+    height: 99%;
     
     `;
 const Mobile = styled.div`
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100vh;
+    width: 99.9%;
+    height: 99%;
     
     `;
 

@@ -1,15 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import UserItem from './UserItem';
 
-const List = styled.ul`
-    list-style: none;
-    margin-block-start: 0em;
-    margin-block-end: 0em;
-    padding-inline-start: 0px;
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 80%;
+    background-color: white;
     overflow-y: scroll;
     ::-webkit-scrollbar {  
      width: 8px;  
@@ -29,6 +28,15 @@ const List = styled.ul`
         }
     };
     scrollbar-gutter: stable;
+`;
+const List = styled.ul`
+    list-style: none;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    padding-inline-start: 0px;
+    width: 100%;
+    /* height: 80%; */
+    
      
 `;
 
@@ -36,15 +44,22 @@ const List = styled.ul`
 
 export default function UserList({data, messages, all}) {
   
-  const lastMessage = React.useRef(null);
-  const scrollUp = () => {
-    lastMessage.current?.scrollIntoView({ behavior: "smooth" });
-  };
-  useEffect(scrollUp, [data]);
+  // const lastMessage = React.useRef(null);
+  // const scrollUp = () => {
+  //   lastMessage.current?.scrollIntoView({ behavior: "smooth" });
+  //   console.log('scrolling')
+  // };
+   useEffect(() => {
+    // 👇️ scroll to top on page load
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, [messages]);
+  // useEffect(scrollUp, []);
  
   return (
-    <List>
-      <div ref={lastMessage}></div>
+    <Container>
+      {/* <div ref={lastMessage}></div> */}
+        <List>
+      
       {data&&data.map((e, i) => {
         return (<UserItem key={i}
           data={e}
@@ -54,5 +69,6 @@ export default function UserList({data, messages, all}) {
       
       
     </List>
+  </Container>  
   )
 }

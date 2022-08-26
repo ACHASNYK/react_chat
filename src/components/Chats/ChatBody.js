@@ -52,30 +52,34 @@ const ChatList = styled.ul`
 const Shake = keyframes`
 
 from {
-    margin-bottom: 0.5vh;
+    transform: translateY(1vh);
 }
 to { 
-    margin-bottom: 5vh;
+    transform: translateY(70vh);
 }
 `;
 const Notification = styled.div`
     position: fixed;
     display: ${props => props.alarm?'flex' : 'none'};
-    width: 25vh;
-    height: 8vh;
-    background-color: white;
+    flex-direction: row;
+    width: 30vh;
+    height: 10vh;
+    background-color: #383838;
     border: 1px solid gainsboro;
     border-radius: 2vh;
-    color: #383838;
+    color: white;
     font-size: 1em;
-    font-weight: 300;
+    font-weight: 400;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding-left: 1vh;
-    padding-right: 1vh;
-    margin-bottom: 20vh;
-    margin-right: 10vh;
+    padding-right: 2vh;
+    padding-left: 2vh;
+    margin-top: 3vh;
+    margin-right: 0;
+    z-index: 4;
+    /* transition: all 1s ease-out; */
+    /* transform: translateY(10vh); */
     filter: drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.15));
     animation: ${Shake} 1s ease-in forwards;
     cursor: pointer;
@@ -87,19 +91,19 @@ const Notification = styled.div`
 }
 };
     `;
-const Button = styled.div`
-  height: 3vh;
-  width: 3vh;
-  border-radius: 50%;
-  cursor: pointer;
-        &:hover {transition: 0.2s;
+// const Button = styled.div`
+//   height: 3vh;
+//   width: 3vh;
+//   border-radius: 50%;
+//   cursor: pointer;
+        /* &:hover {transition: 0.2s;
         filter: drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.15));
         &:active {
         transform: scale(0.96);
         filter: drop-shadow(0px 1px 2px rgba(29, 31, 34, 0.15));
 }
-};
-  `
+}; */
+  // `
 
 export default function ChatBody({data, photo, messages}) {
     const [alarm, setAlarm] = useState(false);
@@ -125,7 +129,14 @@ export default function ChatBody({data, photo, messages}) {
     return (
     
       <Body >
-          <ChatList>
+          <Notification onClick={handleNotification} alarm={ alarm }>You have {incoming.length} new message(s) 
+          {/* <Button> */}
+            <Cancel />
+          {/* </Button> */}
+        </Notification>
+        
+        
+        <ChatList>
           {data.map((e, i) => {
             
             return e.is_incoming?
@@ -141,11 +152,7 @@ export default function ChatBody({data, photo, messages}) {
             />
           })}  
         </ChatList>
-        <Notification onClick={handleNotification} alarm={ alarm }>New {incoming.length} messages 
-          <Button>
-            <Cancel />
-          </Button>
-        </Notification>
+        
           <div ref={lastMessage}></div>
     </Body> 
   )
