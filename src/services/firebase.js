@@ -5,7 +5,8 @@ import {
     collection,
     addDoc,
     getDocs,
-    where,
+    doc,
+    updateDoc,
     serverTimestamp,
     onSnapshot,
     query,
@@ -96,6 +97,19 @@ async function postAnswer(userID, text) {
         console.error(error);
     }
 }
+
+async function updateAnswer(docID) {
+    const docRef = doc(db, 'chat-app2', docID)
+    try {
+        await updateDoc(docRef, {
+            
+            is_delayed: false,
+            
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
 const firebaseConfig = {
   apiKey: "AIzaSyCXkfmnK4WuThdx-CQxOkwWOIaHVW6GgXQ",
   authDomain: "chat-app-achasnyk.firebaseapp.com",
@@ -125,4 +139,4 @@ async function loginWithGoogle() {
     }
 }
 
-export { loginWithGoogle, postMessage, db, getMessages, getUpdate, postAnswer, getUsers };
+export { loginWithGoogle, postMessage, db, getMessages, getUpdate, postAnswer, getUsers, updateAnswer };

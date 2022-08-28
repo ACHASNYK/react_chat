@@ -107,14 +107,14 @@ const Notification = styled.div`
 
 export default function ChatBody({data, photo, messages}) {
     const [alarm, setAlarm] = useState(false);
-    const [number, setNumber] = useState(null);
+    // const [number, setNumber] = useState(null);
   const incoming = messages.filter(obj => {return obj.is_delayed===true })
   const lastMessage = React.useRef(null);
-  console.log(incoming.length, number)
+  console.log(incoming.length)
   const notiFication = () => {
-    if (incoming.length > number) {
+    if (incoming.length > 0) {
       setAlarm(true);
-      setNumber(incoming.length)
+      // setNumber(incoming.length)
     }
   }
   const handleNotification = () => {
