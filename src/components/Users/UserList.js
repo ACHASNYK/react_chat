@@ -43,17 +43,12 @@ const List = styled.ul`
 
 
 export default function UserList({data, messages, all}) {
-  
-  // const lastMessage = React.useRef(null);
-  // const scrollUp = () => {
-  //   lastMessage.current?.scrollIntoView({ behavior: "smooth" });
-  //   console.log('scrolling')
-  // };
+    
    useEffect(() => {
-    // 👇️ scroll to top on page load
+    
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }, [messages]);
-  // useEffect(scrollUp, []);
+ 
  
   return (
     <Container>

@@ -91,26 +91,14 @@ const Notification = styled.div`
 }
 };
     `;
-// const Button = styled.div`
-//   height: 3vh;
-//   width: 3vh;
-//   border-radius: 50%;
-//   cursor: pointer;
-        /* &:hover {transition: 0.2s;
-        filter: drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.15));
-        &:active {
-        transform: scale(0.96);
-        filter: drop-shadow(0px 1px 2px rgba(29, 31, 34, 0.15));
-}
-}; */
-  // `
+
 
 export default function ChatBody({data, photo, messages}) {
     const [alarm, setAlarm] = useState(false);
     // const [number, setNumber] = useState(null);
   const incoming = messages.filter(obj => {return obj.is_delayed===true })
   const lastMessage = React.useRef(null);
-  console.log(incoming.length)
+  // console.log(incoming.length)
   const notiFication = () => {
     if (incoming.length > 0) {
       setAlarm(true);

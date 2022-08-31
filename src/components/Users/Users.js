@@ -3,12 +3,11 @@ import styled from 'styled-components';
 import UserHeader from './UserHeader';
 import UserList from './UserList';
 import ChatsTitle from './ChatsTitle';
-// import { db } from '../../services/firebase';
-import { useState, useEffect } from 'react';
+
+import { useState} from 'react';
 
 import { useMessages } from '../../hooks/useMessages';
-// import { set_marked } from '../../redux/marked';
-// import { useDispatch, useSelector } from 'react-redux';
+
 
 
 
@@ -36,8 +35,7 @@ export default function Users({init}) {
     
     const move = (arr, mess, on = 1) => {
         const lastId = mess?.at(-1)?.user;
-        console.log('lastId', lastId);
-               
+        
         
         const idx = arr.findIndex(obj => { return obj.id === lastId });
         console.log('idx', idx)

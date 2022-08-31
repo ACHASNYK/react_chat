@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux/es/exports';
 import { set_userId } from '../../redux/userid';
 import { ReactComponent as Circle } from '../Icons/check_circle.svg';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { updateAnswer } from '../../services/firebase';
 
 const Item = styled.div`
     width: 100%;
@@ -38,11 +39,9 @@ const UserAvatar = styled.div`
 const UserPhoto = styled.img`
     object-fit: contain;
     position: relative;
-    /* margin-top: 0; */
+    
     border-radius: 50%;
-    /* margin-left: 0vh; */
-    /* padding-top: 1px; */
-    /* padding-right: 1px; */
+    
     height: 8vh;
     width: 8vh;
     
@@ -95,7 +94,7 @@ const Alert = styled.div`
     background-color: #383838;
     color: white;
     height: 2.2vh;
-    width: 4vh;
+    width: 2.2vh;
     border-radius: 5vh;
     margin-left: 6vh;
     margin-top: -.5vh;
@@ -108,9 +107,9 @@ const Alert = styled.div`
 `
 
 export default function MUserItem({ data, messages }) {
-    const [marked, setMarked] = useState(null)
+    
     const [boolean, setBoolean] = useState(true)
-    const [inc, setInc] = useState(null)
+    
     const { id, user_photo } = data;
     const dispatch = useDispatch();
     const setsessionId = (user) => { sessionStorage.setItem('current_user', JSON.stringify(user)) }
@@ -120,17 +119,19 @@ export default function MUserItem({ data, messages }) {
    ;
     const delayed = myMessages?.filter(obj => { return obj.is_delayed === true })
     
+    const handleUpdate = () => {
+        delayed.forEach(obj => {
+            updateAnswer(obj.id)
+        })
+    }
     const handleMarked = () => {
-        if ((boolean && delayed.length > marked)||(!boolean&&delayed.length>marked)) {
-            setMarked(delayed.length);
+        if (delayed.length!==0 ) {
             setBoolean(true);
+        } else if (delayed.length === 0) {
+            setBoolean(false)
         }
     }
-    const handleRendering = () => {
-        if (messages.length > messages) {
-            setInc(messages.length)
-        }
-    }
+    
     const handleBoolean = () => {
         setBoolean(false)
     }
@@ -139,22 +140,18 @@ export default function MUserItem({ data, messages }) {
         return calc.toLocaleString();
     }
      const timestamp = stamp(lastMessage?.timestamp)
-    console.log('my', myMessages)
-    console.log('delayed', delayed, 'marked', marked)
-    useEffect(() => { const handleMarked = () => {
-        if ((boolean && delayed.length > marked)||(!boolean&&delayed.length>marked)) {
-            setMarked(delayed.length);
-            setBoolean(true);
-        }
-    };
-        handleMarked()
-        handleRendering()
-    }, [handleMarked, handleBoolean, handleRendering])
+    
+    
+    useEffect(() => {
+        handleMarked();
+    },
+        
+     [handleMarked, messages, boolean])
   return (
       <Link to="/chat" className='links'>
-        <Item onClick={() => { dispatch(set_userId(data)); setsessionId(data); handleBoolean() }} >
+          <Item onClick={() => { dispatch(set_userId(data)); setsessionId(data); handleBoolean(); handleUpdate() }} >
           <UserAvatar>
-              <Alert boolean={ boolean}>NEW</Alert>
+                  <Alert boolean={boolean}>{ delayed.length}</Alert>
               <UserPhoto alt='image' src={user_photo}  />
               <Check>
                   <Circle/>

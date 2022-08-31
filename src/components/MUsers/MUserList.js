@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import MUserItem from './MUserItem';
 
 const List = styled.ul`
@@ -12,7 +12,7 @@ const List = styled.ul`
     height: 80%;
     overflow-y: scroll;
     ::-webkit-scrollbar {  
-     width: 8px;  
+     width: 6px;  
     }; 
     ::-webkit-scrollbar-track { 
     background-color: transparent; 

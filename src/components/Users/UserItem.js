@@ -124,11 +124,7 @@ export default function UserItem({ data, messages }) {
         });
     }
     const handleMarked = () => {
-        // if ((boolean && delayed.length > marked)||(!boolean&&delayed.length>marked)) {
-        //     setMarked(delayed.length);
-        //     setBoolean(true);
-        // }
-        if (delayed.length !==0) {
+                if (delayed.length !==0) {
             setBoolean(true)
         } else if (delayed.length === 0) {
             setBoolean(false)

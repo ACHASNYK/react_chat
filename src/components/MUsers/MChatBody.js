@@ -14,7 +14,7 @@ const Body = styled.div`
     background-color: #f8f8f8;
     overflow-y: scroll;
     ::-webkit-scrollbar {  
-     width: 10px;  
+     width: 6px;  
     }; 
     ::-webkit-scrollbar-track { 
     background-color: transparent; 
@@ -52,10 +52,10 @@ const ChatList = styled.ul`
 const Shake = keyframes`
 
 from {
-    margin-bottom: 0.5vh;
+    transform: translateY(1vh);
 }
 to { 
-    margin-bottom: 5vh;
+    transform: translateY(50vh);
 }
 `;
 const Notification = styled.div`
@@ -63,12 +63,12 @@ const Notification = styled.div`
     display: ${props => props.alarm?'flex' : 'none'};
     width: 25vh;
     height: 8vh;
-    background-color: white;
+    background-color: #383838;
     border: 1px solid gainsboro;
     border-radius: 2vh;
-    color: #383838;
+    color: white;
     font-size: 1em;
-    font-weight: 300;
+    font-weight: 400;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -76,6 +76,7 @@ const Notification = styled.div`
     padding-right: 1vh;
     margin-bottom: 20vh;
     margin-right: 10vh;
+    z-index: 4;
     filter: drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.15));
     animation: ${Shake} 1s ease-in forwards;
     cursor: pointer;
@@ -87,30 +88,30 @@ const Notification = styled.div`
 }
 };
     `;
-const Button = styled.div`
-  height: 3vh;
-  width: 3vh;
-  border-radius: 50%;
-  cursor: pointer;
-        &:hover {transition: 0.2s;
-        filter: drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.15));
-        &:active {
-        transform: scale(0.96);
-        filter: drop-shadow(0px 1px 2px rgba(29, 31, 34, 0.15));
-}
-};
-  `
+// const Button = styled.div`
+//   height: 3vh;
+//   width: 3vh;
+//   border-radius: 50%;
+//   cursor: pointer;
+//         &:hover {transition: 0.2s;
+//         filter: drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.15));
+//         &:active {
+//         transform: scale(0.96);
+//         filter: drop-shadow(0px 1px 2px rgba(29, 31, 34, 0.15));
+// }
+// };
+  // `
 
 export default function MChatBody({data, photo, messages}) {
     const [alarm, setAlarm] = useState(false);
-    const [number, setNumber] = useState(null);
+    // const [number, setNumber] = useState(null);
   const incoming = messages.filter(obj => {return obj.is_delayed===true })
   const lastMessage = React.useRef(null);
-  console.log(incoming.length, number)
+  // console.log(incoming.length)
   const notiFication = () => {
-    if (incoming.length > number) {
+    if (incoming.length > 0) {
       setAlarm(true);
-      setNumber(incoming.length)
+      // setNumber(incoming.length)
     }
   }
   const handleNotification = () => {
@@ -141,10 +142,10 @@ export default function MChatBody({data, photo, messages}) {
             />
           })}  
         </ChatList>
-        <Notification onClick={handleNotification} alarm={ alarm }>New {incoming.length} messages 
-          <Button>
+        <Notification onClick={handleNotification} alarm={ alarm }>You have {incoming.length} new message(s) 
+          {/* <Button> */}
             <Cancel />
-          </Button>
+          {/* </Button> */}
         </Notification>
           <div ref={lastMessage}></div>
     </Body> 
